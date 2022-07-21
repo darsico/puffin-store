@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useCartStore, useStore } from '../../store.js';
 import TinyLoader from '../Loaders/TinyLoader.jsx';
 
 const AddToCartButton = () => {
   const [isLoading, setIsLoading] = useState(false);
-
-  const { variantOption, productItem } = useStore((state) => state);
+  const { variantOption, productItem, setIsOpenCart } = useStore((state) => state);
   const { setCart } = useCartStore((state) => state);
   const { price, salePrice, id } = variantOption;
   const { name, deviceModel } = productItem;
   const deviceName = deviceModel && deviceModel[0].name;
-
+  const productImage = variantOption && variantOption.productImages;
   const productToOrder = {
+    productImage,
     productId: id,
     name,
     device: deviceName,
@@ -21,7 +21,7 @@ const AddToCartButton = () => {
   };
   const addToCart = () => {
     setCart(productToOrder);
-    // console.log('added', productToOrder);
+    setIsOpenCart(true);
   };
 
   return (

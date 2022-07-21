@@ -9,15 +9,21 @@ export const useStore = create(
     variantOption: {},
     setInitialVariantOption: (data) => set({ variantOption: data }),
     setVariantOption: (id) => set((state) => ({ ...state, variantOption: state.productItem.variants.filter((element) => element.id === id)[0] })),
-    openCart: false,
-    setOpenCart: (data) => set({ openCart: data }),
+    isOpenCart: false,
+    setIsOpenCart: (data) => set({ isOpenCart: data }),
   }))
 );
+
+const dummyStorageApi = {
+  getItem: () => null,
+  setItem: () => undefined,
+};
 
 export const useCartStore = create(
   persist(
     (set, get) => ({
       cart: [],
+
       setCart: (data) =>
         set((state) => {
           const doesProductExist = state.cart.filter((item) => item.productId === data.productId);
@@ -28,11 +34,31 @@ export const useCartStore = create(
               }
             : { ...state, cart: [...state.cart, data] };
         }),
+
       removeCart: (id) => set((state) => ({ cart: state.cart.filter((element) => element.id !== id) })),
       clearCart: () => set(() => ({ cart: [] })),
       totalCart: get((state) => state.cart.reduce((acc, curr) => acc + curr.price, 0)),
+
+      decreaseOne: (id) =>
+        set((state) => {
+          let itemToDelete = state.cart.find((item) => item.productId === id); // get the item to delete
+          return itemToDelete.quantity > 1
+            ? {
+                ...state,
+                cart: state.cart.map((item) => (item.productId === id ? { ...item, quantity: item.quantity - 1 } : item)),
+              }
+            : { ...state, cart: state.cart.filter((item) => item.productId !== id) };
+        }),
+      increaseOne: (id) =>
+        set((state) => {
+          let itemToIncrease = state.cart.find((item) => item.productId === id); // get the item to increase
+          return {
+            ...state,
+            cart: state.cart.map((item) => (item.productId === id ? { ...item, quantity: item.quantity + 1 } : item)),
+          };
+        }),
     }),
-    { name: 'cart' }
+    { name: 'cart', storage: typeof window !== 'undefined' ? window.localStorage : dummyStorageApi }
   )
 );
 

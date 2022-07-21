@@ -1,10 +1,11 @@
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import AddToCartButton from '../../src/components/Buttons/AddToCartButton';
 import CheckoutButton from '../../src/components/Buttons/CheckoutButton';
 import WhatsAppButton from '../../src/components/Buttons/WhatsAppButton';
 import Carousel from '../../src/components/Carousel/CarouselWithThumb';
 import Layout from '../../src/components/layout/Layout';
+import MiniCart from '../../src/components/MiniCart/MiniCart';
 import Options from '../../src/components/Options/Options';
 import Price from '../../src/components/Price/Price';
 import { SINGLE_CASE_DESIGN } from '../../src/data/queryCaseDesign';
@@ -39,6 +40,7 @@ const ProductPage = ({ productItem }) => {
   const { name, id, series, slug, description, variants, deviceModel } = productItem;
   // const totalItems = useCartStore((state) => state.cart.length);
   // console.log(totalItems);
+
   useEffect(() => {
     useStore.getState().setProductItem(productItem);
     useStore.getState().setInitialVariantOption(variants[0]);
@@ -50,7 +52,6 @@ const ProductPage = ({ productItem }) => {
         <div className="  ">
           <Carousel data={variants} />
         </div>
-        {/* Product info */}
         <div className="max-w-2xl mx-auto pb-16 px-4 sm:px-0 lg:pt-0 lg:pb-24 lg:grid lg:grid-cols-1 lg:grid-rows-[auto,auto,1fr] ">
           <div className="lg:col-span-2 ">
             {/* <h2>{totalItems} productos</h2> */}

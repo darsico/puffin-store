@@ -5,8 +5,7 @@ const WhatsAppButton = () => {
   const { variantOption, productItem } = useStore((state) => state);
   const { price, salePrice } = variantOption;
   const { name, deviceModel } = productItem;
-  console.log(deviceModel);
-  // const { name: deviceName } = deviceModel[0];
+
   const apiWhatsApp = `https://api.whatsapp.com/send?phone=51948023248&text=Hola%20Puffin%20Case%20Store,%20quiero%20comprar%20el%20siguiente%20producto:%20${name};%20Modelo:%20;%20el%20precio%20es%20el%20siguiente:%20S/.%20${salePrice || price}.%20Muchas%20Gracias`;
 
   const router = useRouter();

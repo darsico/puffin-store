@@ -1,52 +1,54 @@
+import Link from 'next/link';
+import logo from '../../../public/logo.svg';
+import { CgShoppingCart } from 'react-icons/cg';
+import { IoIosMenu } from 'react-icons/io';
+import { GrClose } from 'react-icons/gr';
+
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import CartIcon from '../MiniCart/CartIcon';
+
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  useEffect(() => {
+    isMenuOpen ? (document.body.style.overflow = 'hidden') : (document.body.style.overflow = 'auto');
+  }, [isMenuOpen]);
+
+  const handleMenuClose = () => {
+    setIsMenuOpen(false);
+  };
   return (
-    <div className="navbar bg-base-100">
-      <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
-      </div>
-      <div className="flex-none">
-        <div className="dropdown dropdown-end">
-          <label tabindex="0" className="btn btn-ghost btn-circle">
-            <div className="indicator">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              <span className="badge badge-sm indicator-item">8</span>
-            </div>
-          </label>
-          <div tabindex="0" className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
-            <div className="card-body">
-              <span className="font-bold text-lg">8 Items</span>
-              <span className="text-info">Subtotal: $999</span>
-              <div className="card-actions">
-                <button className="btn btn-primary btn-block">View cart</button>
-              </div>
-            </div>
-          </div>
+    <header className=" fixed top-0 left-1/2 transform -translate-x-1/2  z-30 bg-blend-darken bg-white lg:w-[1024px] w-[90%]">
+      <section className="container mx-auto flex justify-between items-center px-4 py-3 overflow-y-auto ">
+        <div className="flex justify-between items-center z-30 ">
+          <Link href="/">
+            <a>
+              <figure className="w-36 lg:w-44">
+                <Image src={logo} alt="logo" className="" />
+              </figure>
+            </a>
+          </Link>
         </div>
-        <div className="dropdown dropdown-end">
-          <label tabindex="0" className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img src="https://placeimg.com/80/80/people" />
+        <div className="flex flex-wrap ">
+          <nav className={`${isMenuOpen ? 'fixed  bg-white' : 'hidden'}   lg:flex items-center justify-center left-0 top-0 lg:relative h-full w-full lg:w-fit lg:h-full z-20 lg:z-0 px-6 text-3xl lg:text-xl `}>
+            <div className="flex flex-col lg:flex-row gap-3 w-full lg:w-fit h-full lg:h-fit justify-center  lg:justify-start">
+              <Link href="/shop">
+                <a onClick={handleMenuClose}>Cases</a>
+              </Link>
+              <Link href="/explore">
+                <a onClick={handleMenuClose}>Explora</a>
+              </Link>
+              <Link href="/sale">
+                <a onClick={handleMenuClose}>Sale</a>
+              </Link>
             </div>
-          </label>
-          <ul tabindex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-            <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
-          </ul>
+          </nav>
+
+          <div className="pr-3">{isMenuOpen ? <GrClose className="z-30 text-2xl hover:cursor-pointer" onClick={() => setIsMenuOpen(false)} /> : <IoIosMenu className="text-3xl hover:cursor-pointer lg:hidden" onClick={() => setIsMenuOpen(true)} />}</div>
+          <CartIcon />
         </div>
-      </div>
-    </div>
+      </section>
+    </header>
   );
 };
 

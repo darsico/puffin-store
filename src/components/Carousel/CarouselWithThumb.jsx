@@ -31,7 +31,6 @@ const Carousel = () => {
         className="mySwiper2"
       >
         {productImages?.map((item, index) => {
-          console.log(item);
           return (
             <SwiperSlide key={index} className="">
               <img src={item} />
