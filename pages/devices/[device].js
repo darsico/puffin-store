@@ -2,7 +2,7 @@ import Layout from '../../src/components/layout/Layout';
 import ProductCard from '../../src/components/Products/ProductCard';
 import Container from '../../src/components/UI/Container';
 import { GET_ALL_DEVICES, GET_SINGLE_DEVICE } from '../../src/data/queryDevice';
-import { useQuery } from '../../src/hooks/useQuery';
+import { queryClient } from '../../src/hooks/queryClient';
 import { useRouter } from 'next/router';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -11,8 +11,9 @@ import Slider from 'react-slick';
 import { GrPrevious, GrNext } from 'react-icons/gr';
 import { AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+
 export const getStaticPaths = async () => {
-  const { data } = await useQuery(GET_ALL_DEVICES);
+  const { data } = await queryClient(GET_ALL_DEVICES);
   const paths = data.queryDeviceModel.map((item) => ({ params: { device: item.name.toLowerCase().replace(/\s/g, '-') } }));
   return {
     paths,
@@ -23,11 +24,11 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {
   const { params } = context;
   const { device } = params;
-  const { data: allDevices } = await useQuery(GET_ALL_DEVICES);
+  const { data: allDevices } = await queryClient(GET_ALL_DEVICES);
   const models = allDevices.queryDeviceModel.map((item) => ({ ...item, slug: item.name.toLowerCase().replace(/\s/g, '-') }));
   const deviceModel = models.find((item) => item.slug === device);
   const VARIABLES = { id: deviceModel.id };
-  const { data } = await useQuery(GET_SINGLE_DEVICE, VARIABLES);
+  const { data } = await queryClient(GET_SINGLE_DEVICE, VARIABLES);
 
   return {
     props: {
