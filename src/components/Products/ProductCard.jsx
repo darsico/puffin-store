@@ -24,12 +24,8 @@ const ProductCard = ({ singleProduct, device }) => {
     setVariantOption(index);
     // console.log(index);
   };
-  // useEffect(() => {
-  //   console.log(singleProduct.variants[variantOption]);
-  // }, [variantOption]);
 
   const handleAddToCart = () => {
-    console.log(productToOrder);
     setCart(productToOrder);
     setIsOpenCart(true);
   };
@@ -65,7 +61,7 @@ const ProductCard = ({ singleProduct, device }) => {
             );
           })}
         </div>
-        <button className="w-full p-2 mt-6 text-xl transition-all border border-gray-600 rounded-md hover:bg-gray-600 hover:text-white" onClick={handleAddToCart}>
+        <button className="w-full p-2 mt-6 text-xl transition-all border border-gray-600 hover:bg-black hover:text-white" onClick={handleAddToCart}>
           Agregar al Carrito
         </button>
       </div>

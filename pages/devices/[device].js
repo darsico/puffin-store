@@ -8,9 +8,9 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { motion } from 'framer-motion';
 import Slider from 'react-slick';
-import { GrPrevious, GrNext } from 'react-icons/gr';
 import { AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import { carouselProperties } from '../../src/utils/carouselProps';
 
 export const getStaticPaths = async () => {
   const { data } = await queryClient(GET_ALL_DEVICES);
@@ -44,45 +44,6 @@ const DeviceShop = ({ products, allDevices }) => {
 
   const handleDeviceFilterClick = (slug) => {
     router.push({ pathname: `/devices/${slug}`, query: { device: slug } }, undefined, { shallow: false });
-  };
-
-  const carouselProperties = {
-    prevArrow: <GrPrevious />,
-    nextArrow: <GrNext />,
-    slidesToShow: 6,
-    infinite: true,
-    centerMode: false,
-    // adaptiveHeight: true,
-    // centerPadding: '700px',
-    responsive: [
-      {
-        breakpoint: 350,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-      {
-        breakpoint: 550,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 769,
-        settings: {
-          slidesToShow: 3,
-          initial: 1,
-        },
-      },
-      {
-        breakpoint: 1025,
-        settings: {
-          slidesToShow: 3,
-
-          slidesToScroll: 2,
-        },
-      },
-    ],
   };
 
   return (

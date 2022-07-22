@@ -26,7 +26,7 @@ const AddToCartButton = () => {
   return (
     <button
       onClick={addToCart}
-      className="flex items-center justify-center w-full px-8 py-3 text-base font-medium text-gray-900 transition-colors border border-gray-700 border-solid rounded-md hover:bg-gray-700 hover:text-white hover:border-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 focus:ring-opacity-50 focus:shadow-outline-gray-500"
+      className="flex items-center justify-center w-full px-8 py-3 text-base font-medium text-gray-900 transition-colors border border-gray-700 border-solid hover:bg-gray-700 hover:text-white hover:border-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 focus:ring-opacity-50 focus:shadow-outline-gray-500"
     >
       Agregar al Carrito
     </button>
