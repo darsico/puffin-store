@@ -4,6 +4,8 @@ import { devtools, persist } from 'zustand/middleware';
 
 export const useStore = create(
   devtools((set) => ({
+    deviceModels: [],
+    setDeviceModels: (deviceModels) => set((state) => ({ ...state, deviceModels })),
     productItem: {},
     setProductItem: (data) => set({ productItem: data }),
     variantOption: {},
@@ -35,7 +37,7 @@ export const useCartStore = create(
             : { ...state, cart: [...state.cart, data] };
         }),
 
-      removeCart: (id) => set((state) => ({ cart: state.cart.filter((element) => element.id !== id) })),
+      removeCart: (id) => set((state) => ({ ...state, cart: state.cart.filter((element) => element.productId !== id) })),
       clearCart: () => set(() => ({ cart: [] })),
       totalCart: get((state) => state.cart.reduce((acc, curr) => acc + curr.price, 0)),
 
@@ -51,7 +53,6 @@ export const useCartStore = create(
         }),
       increaseOne: (id) =>
         set((state) => {
-          let itemToIncrease = state.cart.find((item) => item.productId === id); // get the item to increase
           return {
             ...state,
             cart: state.cart.map((item) => (item.productId === id ? { ...item, quantity: item.quantity + 1 } : item)),

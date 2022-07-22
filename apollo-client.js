@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
+import { ApolloClient, InMemoryCache, HttpLink, ApolloProvider } from '@apollo/client';
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -8,3 +8,6 @@ const client = new ApolloClient({
 });
 
 export default client;
+export const ApolloContext = ({ children }) => {
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+};
