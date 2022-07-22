@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import Image from 'next/image';
 
-import { GET_SLUGS, querySlugs } from '../src/data/querySlugs';
-import { useQuery } from '../src/hooks/useQuery';
+import { GET_SLUGS } from '../src/data/querySlugs';
+import { queryClient } from '../src/hooks/queryClient';
 import styles from '../styles/Home.module.css';
 
 export const getStaticProps = async () => {
-  const { data } = await useQuery(GET_SLUGS);
+  const { data } = await queryClient(GET_SLUGS);
   return {
     props: {
       data,

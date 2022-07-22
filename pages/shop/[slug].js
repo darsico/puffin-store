@@ -9,11 +9,11 @@ import Options from '../../src/components/Options/Options';
 import Price from '../../src/components/Price/Price';
 import { SINGLE_CASE_DESIGN } from '../../src/data/queryCaseDesign';
 import { GET_SLUGS } from '../../src/data/querySlugs';
-import { useQuery } from '../../src/hooks/useQuery';
+import { queryClient } from '../../src/hooks/queryClient';
 import { useStore } from '../../src/store';
 
 export const getStaticPaths = async () => {
-  const { data } = await useQuery(GET_SLUGS);
+  const { data } = await queryClient(GET_SLUGS);
   const paths = data.queryCaseDesign.map((item) => ({ params: { slug: item.slug } }));
   return {
     paths,
@@ -25,7 +25,7 @@ export const getStaticProps = async (context) => {
   const { params } = context;
   const { slug } = params;
   const VARIABLES = { slug: slug };
-  const { data } = await useQuery(SINGLE_CASE_DESIGN, VARIABLES);
+  const { data } = await queryClient(SINGLE_CASE_DESIGN, VARIABLES);
 
   return {
     props: {
