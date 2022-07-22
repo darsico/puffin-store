@@ -1,8 +1,20 @@
 import Head from 'next/head';
 import Image from 'next/image';
+
+import { GET_SLUGS, querySlugs } from '../src/data/querySlugs';
+import { useQuery } from '../src/hooks/useQuery';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
+export const getStaticProps = async () => {
+  const { data } = await useQuery(GET_SLUGS);
+  return {
+    props: {
+      data,
+    },
+  };
+};
+
+export default function Home({ data }) {
   return (
     <div className={styles.container}>
       <Head>
