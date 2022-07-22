@@ -12,7 +12,7 @@ const WhatsAppButton = () => {
         href={apiWhatsApp}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white transition-colors border border-transparent rounded-md bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+        className="flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white transition-colors border border-transparent bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
       >
         Pedir en <IoLogoWhatsapp className="mx-3 scale-150" /> por S/.{salePrice || price}
       </a>
