@@ -4,13 +4,29 @@ import { devtools, persist } from 'zustand/middleware';
 
 export const useStore = create(
   devtools((set) => ({
-    deviceModels: [],
-    setDeviceModels: (deviceModels) => set((state) => ({ ...state, deviceModels })),
+    productItemsByDevice: [],
+    setProductItemsByDevice: (item) => set((state) => ({ ...state, productItemsByDevice: item })),
+
+    changeInitialVariant: (variantId, designId) =>
+      set((state) => {
+        const itemSelected = state.productItemsByDevice.find((item) => item.id === designId).variants.find((item) => item.id === variantId);
+        return {
+          ...state,
+          productItemsByDevice: state.productItemsByDevice.map((item) => {
+            if (item.id === designId) {
+              return { ...item, initialVariant: itemSelected };
+            }
+            return item;
+          }),
+        };
+      }),
     productItem: {},
     setProductItem: (data) => set({ productItem: data }),
+
     variantOption: {},
     setInitialVariantOption: (data) => set({ variantOption: data }),
     setVariantOption: (id) => set((state) => ({ ...state, variantOption: state.productItem.variants.filter((element) => element.id === id)[0] })),
+
     isOpenCart: false,
     setIsOpenCart: (data) => set({ isOpenCart: data }),
   }))

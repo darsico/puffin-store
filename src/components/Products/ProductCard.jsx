@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import { useCartStore, useStore } from '../../store';
 
 const ProductCard = ({ singleProduct, device }) => {
-  const [variantOption, setVariantOption] = useState(0);
-  const { name, price, productImages, salePrice, id } = singleProduct.variants[variantOption];
+  const [localVariantOption, setLocalVariantOption] = useState(0);
+  const { name, price, productImages, salePrice, id } = singleProduct.variants[localVariantOption];
   const { setCart } = useCartStore((state) => state);
-  const { setIsOpenCart } = useStore((state) => state);
+  const { setIsOpenCart, changeInitialVariant } = useStore((state) => state);
   const image = productImages[0];
 
   const productToOrder = {
@@ -17,12 +17,12 @@ const ProductCard = ({ singleProduct, device }) => {
     device: device,
     price: salePrice || price,
     quantity: 1,
-    color: singleProduct.variants[variantOption].name,
+    color: singleProduct.variants[localVariantOption].name,
   };
 
-  const handleVariantChange = (index) => {
-    setVariantOption(index);
-    // console.log(index);
+  const handleVariantChange = (index, variantId, designId) => {
+    setLocalVariantOption(index);
+    changeInitialVariant(variantId, designId);
   };
 
   const handleAddToCart = () => {
@@ -55,7 +55,7 @@ const ProductCard = ({ singleProduct, device }) => {
         <div className="flex gap-4 pt-2 h-fit w-fit">
           {singleProduct.variants.map((variant, index) => {
             return (
-              <figure className="border-2 border-gray-500 rounded-full w-7 h-7 hover:cursor-pointer" key={variant.id} onClick={() => handleVariantChange(index)}>
+              <figure className="border-2 border-gray-500 rounded-full w-7 h-7 hover:cursor-pointer" key={variant.id} onClick={() => handleVariantChange(index, variant.id, singleProduct.id)}>
                 <img src={variant.textureImage} alt="" className="object-cover object-center w-full h-full rounded-full" />
               </figure>
             );

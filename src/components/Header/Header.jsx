@@ -13,9 +13,9 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeviceMenuOpen, setIsDeviceMenuOpen] = useState(false);
   const { data } = useQuery(GET_ALL_DEVICES);
-  useEffect(() => {
-    if (data) console.log(data);
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) console.log(data);
+  // }, [data]);
 
   useEffect(() => {
     isMenuOpen ? (document.body.style.overflow = 'hidden') : (document.body.style.overflow = 'auto');
