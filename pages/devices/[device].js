@@ -74,10 +74,6 @@ const DeviceShop = ({ deviceModel, allDevices }) => {
             })}
           </Slider>
         </div>
-        {productItemsByDevice.map((item) => {
-          console.log(item.initialVariant);
-          return <p>{item.initialVariant.name}</p>;
-        })}
         <AnimatePresence>
           <div className="grid gap-3 grid-col-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr ">
             {deviceModel.caseDesign.map((item) => {

@@ -37,10 +37,15 @@ export const getStaticProps = async (context) => {
 
 const ProductPage = ({ productItem }) => {
   const { name, id, series, slug, description, variants, deviceModel } = productItem;
-  const { variantOption } = useStore((state) => state);
+  const { variantOption, productItemsByDevice } = useStore((state) => state);
+
+  const itemFromList = productItemsByDevice?.find((item) => item.id === id);
+  const variantFromList = itemFromList?.initialVariant;
+
   useEffect(() => {
+    console.log(itemFromList);
     useStore.getState().setProductItem(productItem);
-    useStore.getState().setInitialVariantOption(variants[0]);
+    useStore.getState().setInitialVariantOption(variantFromList || variants[0]);
   }, []);
 
   return (
