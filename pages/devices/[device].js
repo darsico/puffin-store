@@ -62,7 +62,7 @@ const DeviceShop = ({ deviceModel, allDevices }) => {
           <Slider {...carouselProperties}>
             {allDevices.map((item) => {
               return (
-                <div className="flex items-center justify-center hover:cursor-pointer" onMouseEnter={() => setIsHover(item.id)} onMouseLeave={() => setIsHover(null)} onClick={() => handleDeviceFilterClick(item.slug)}>
+                <div className="flex items-center justify-center hover:cursor-pointer" onMouseEnter={() => setIsHover(item.id)} onMouseLeave={() => setIsHover(null)} onClick={() => handleDeviceFilterClick(item.slug)} key={item.id}>
                   <div className="flex flex-col items-center justify-center w-24 mx-auto">
                     <motion.img src={item.icon} alt={item.name} className="w-full h-full" animate={{ scale: isHover === item.id ? 1.2 : 1 }} />
                     <motion.p className="leading-4 text-center" animate={{ fontWeight: isHover === item.id ? '600' : '400' }}>
