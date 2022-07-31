@@ -55,7 +55,7 @@ const DeviceShop = ({ deviceModel, allDevices }) => {
   return (
     <Layout>
       <Container>
-        <h1 className="pt-10 text-2xl">
+        <h1 className="pt-10 text-2xl leading-6 ">
           Explora nuestros modelos en <span className="font-bold">{deviceModel?.name}</span>
         </h1>
         <div className="py-10">
@@ -75,7 +75,7 @@ const DeviceShop = ({ deviceModel, allDevices }) => {
           </Slider>
         </div>
         <AnimatePresence>
-          <div className="grid gap-3 grid-col-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr ">
+          <div className="grid md:gap-3 gap-8  grid-col-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr  ">
             {deviceModel.caseDesign.map((item) => {
               return <ProductCard key={item.id} singleProduct={item} device={deviceModel.name} />;
             })}

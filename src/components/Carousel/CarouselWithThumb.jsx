@@ -46,7 +46,7 @@ const Carousel = () => {
               );
             })}
           </Swiper>
-          <Swiper onSwiper={setThumbsSwiper} loop={true} spaceBetween={20} slidesPerView={3} freeMode={true} watchSlidesProgress={true} modules={[FreeMode, Navigation, Thumbs]} className="mySwiper">
+          <Swiper onSwiper={setThumbsSwiper} loop={true} spaceBetween={10} slidesPerView={3} freeMode={true} watchSlidesProgress={true} modules={[FreeMode, Navigation, Thumbs]} className="mySwiper">
             {productImages?.map((item, index) => {
               return (
                 <SwiperSlide key={index}>

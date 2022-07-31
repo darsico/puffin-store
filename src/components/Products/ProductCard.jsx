@@ -31,7 +31,7 @@ const ProductCard = ({ singleProduct, device }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center gap-3 shadow-lg">
+    <div className="flex flex-col justify-center gap-3 shadow-lg rounded-md ">
       <Link href={`/shop/${singleProduct.slug}`}>
         <div className="h-60 hover:cursor-pointer">
           <figure style={{ width: '100%', height: '100%', position: 'relative' }}>
