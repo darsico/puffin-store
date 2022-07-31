@@ -37,13 +37,13 @@ export const getStaticProps = async (context) => {
 
 const ProductPage = ({ productItem }) => {
   const { name, id, series, slug, description, variants, deviceModel } = productItem;
-  const { variantOption, productItemsByDevice } = useStore((state) => state);
+
+  const { productItemsByDevice } = useStore((state) => state);
 
   const itemFromList = productItemsByDevice?.find((item) => item.id === id);
   const variantFromList = itemFromList?.initialVariant;
 
   useEffect(() => {
-    console.log(itemFromList);
     useStore.getState().setProductItem(productItem);
     useStore.getState().setInitialVariantOption(variantFromList || variants[0]);
   }, []);
@@ -56,7 +56,6 @@ const ProductPage = ({ productItem }) => {
         </div>
         <div className="max-w-2xl mx-auto pb-16 px-4 sm:px-0 lg:pt-0 lg:pb-24 lg:grid lg:grid-cols-1 lg:grid-rows-[auto,auto,1fr] ">
           <div className="lg:col-span-2 ">
-            {/* <h2>{totalItems} productos</h2> */}
             <h4 className="text-base font-medium text-gray-400">{series}</h4>
             <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">{name}</h1>
             <p className="text-xl text-gray-600">Diseñado para {deviceModel[0].name}</p>

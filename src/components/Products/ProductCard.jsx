@@ -33,11 +33,11 @@ const ProductCard = ({ singleProduct, device }) => {
   return (
     <div className="flex flex-col justify-center gap-3 shadow-lg">
       <Link href={`/shop/${singleProduct.slug}`}>
-        <figure className="h-60 hover:cursor-pointer">
+        <div className="h-60 hover:cursor-pointer">
           <figure style={{ width: '100%', height: '100%', position: 'relative' }}>
             <Image src={image} alt={`Foto de producto ${singleProduct.name}`} className="object-cover object-center w-full h-full rounded-lg " layout="fill" objectFit="contain" priority />
           </figure>
-        </figure>
+        </div>
       </Link>
       <div className="flex flex-col justify-start px-4 pb-3">
         <Link href={`/shop/${singleProduct.slug}`}>
