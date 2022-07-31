@@ -13,9 +13,9 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeviceMenuOpen, setIsDeviceMenuOpen] = useState(false);
   const { data } = useQuery(GET_ALL_DEVICES);
-  useEffect(() => {
-    if (data) console.log(data);
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) console.log(data);
+  // }, [data]);
 
   useEffect(() => {
     isMenuOpen ? (document.body.style.overflow = 'hidden') : (document.body.style.overflow = 'auto');
@@ -36,19 +36,19 @@ const Header = () => {
     setIsDeviceMenuOpen(false);
   };
   return (
-    <header className=" fixed top-0 left-1/2 transform -translate-x-1/2  z-30 bg-blend-darken bg-white lg:w-[1024px] w-[90%]">
-      <section className="container flex items-center justify-between px-4 py-3 mx-auto overflow-y-auto ">
+    <header className=" fixed top-0 left-1/2 transform -translate-x-1/2  z-30  bg-white lg:w-[1024px] w-[95%]">
+      <section className="container flex items-center justify-between lg:px-4 px-2  py-3 mx-auto overflow-y-auto ">
         <div className="z-30 flex items-center justify-between ">
           <Link href="/">
             <a>
-              <figure className="w-36 lg:w-44">
+              <figure className="w-28 lg:w-40">
                 <Image src={logo} alt="logo" className="" />
               </figure>
             </a>
           </Link>
         </div>
         <div className="flex flex-wrap ">
-          <nav className={`${isMenuOpen ? 'fixed  top-0 left-0 -translate-x-9 bg-white h-[100vh] w-[100vw]' : 'hidden'}   lg:flex items-center justify-center left-0 top-0 lg:relative h-full w-full lg:w-fit lg:h-full z-20 lg:z-0 px-6 text-3xl lg:text-xl `}>
+          <nav className={`${isMenuOpen ? 'fixed  top-0 left-0  bg-white h-[100vh] w-[100vw]' : 'hidden'}   lg:flex items-center justify-center left-0 top-0 lg:relative h-full w-full lg:w-fit lg:h-full z-20 lg:z-0 px-6 text-3xl lg:text-xl -translate-x-3`}>
             <div className="flex flex-col justify-center w-full h-full gap-12 lg:flex-row lg:w-fit lg:h-fit lg:justify-start">
               <p onClick={handleDeviceMenuClick} className="flex items-center justify-center gap-2 hover:cursor-pointer">
                 Compra por modelo

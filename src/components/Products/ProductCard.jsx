@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import { useCartStore, useStore } from '../../store';
 
 const ProductCard = ({ singleProduct, device }) => {
-  const [variantOption, setVariantOption] = useState(0);
-  const { name, price, productImages, salePrice, id } = singleProduct.variants[variantOption];
+  const [localVariantOption, setLocalVariantOption] = useState(0);
+  const { name, price, productImages, salePrice, id } = singleProduct.variants[localVariantOption];
   const { setCart } = useCartStore((state) => state);
-  const { setIsOpenCart } = useStore((state) => state);
+  const { setIsOpenCart, changeInitialVariant } = useStore((state) => state);
   const image = productImages[0];
 
   const productToOrder = {
@@ -17,12 +17,12 @@ const ProductCard = ({ singleProduct, device }) => {
     device: device,
     price: salePrice || price,
     quantity: 1,
-    color: singleProduct.variants[variantOption].name,
+    color: singleProduct.variants[localVariantOption].name,
   };
 
-  const handleVariantChange = (index) => {
-    setVariantOption(index);
-    // console.log(index);
+  const handleVariantChange = (index, variantId, designId) => {
+    setLocalVariantOption(index);
+    changeInitialVariant(variantId, designId);
   };
 
   const handleAddToCart = () => {
@@ -31,13 +31,13 @@ const ProductCard = ({ singleProduct, device }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center gap-3 shadow-lg">
+    <div className="flex flex-col justify-center gap-3 shadow-lg rounded-md ">
       <Link href={`/shop/${singleProduct.slug}`}>
-        <figure className="h-60 hover:cursor-pointer">
+        <div className="h-60 hover:cursor-pointer">
           <figure style={{ width: '100%', height: '100%', position: 'relative' }}>
             <Image src={image} alt={`Foto de producto ${singleProduct.name}`} className="object-cover object-center w-full h-full rounded-lg " layout="fill" objectFit="contain" priority />
           </figure>
-        </figure>
+        </div>
       </Link>
       <div className="flex flex-col justify-start px-4 pb-3">
         <Link href={`/shop/${singleProduct.slug}`}>
@@ -55,7 +55,7 @@ const ProductCard = ({ singleProduct, device }) => {
         <div className="flex gap-4 pt-2 h-fit w-fit">
           {singleProduct.variants.map((variant, index) => {
             return (
-              <figure className="border-2 border-gray-500 rounded-full w-7 h-7 hover:cursor-pointer" key={variant.id} onClick={() => handleVariantChange(index)}>
+              <figure className={`${localVariantOption === index ? 'border-orange-700  border-4 ' : 'border-gray-500 border-2 '} rounded-full w-7 h-7 hover:cursor-pointer`} key={variant.id} onClick={() => handleVariantChange(index, variant.id, singleProduct.id)}>
                 <img src={variant.textureImage} alt="" className="object-cover object-center w-full h-full rounded-full" />
               </figure>
             );

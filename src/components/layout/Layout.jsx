@@ -30,7 +30,7 @@ const Layout = ({ children, title, description }) => {
       </Head>
       <Header />
       <MiniCart />
-      <main className="pt-24">{children}</main>
+      <main className="md:pt-24 pt-20">{children}</main>
       {/* <Footer /> */}
     </>
   );

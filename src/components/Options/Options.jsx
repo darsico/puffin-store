@@ -2,8 +2,6 @@ import { useStore } from '../../store';
 import { motion } from 'framer-motion';
 const Options = ({ variants }) => {
   const { setVariantOption, variantOption } = useStore((state) => state);
-  // const { variantOption } = useStore((state) => state);
-  console.log(variantOption.id);
   const variantId = variantOption.id;
   return (
     <div className="flex flex-col h-fit w-fit gap-2">
