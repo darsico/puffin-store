@@ -55,7 +55,7 @@ const ProductCard = ({ singleProduct, device }) => {
         <div className="flex gap-4 pt-2 h-fit w-fit">
           {singleProduct.variants.map((variant, index) => {
             return (
-              <figure className="border-2 border-gray-500 rounded-full w-7 h-7 hover:cursor-pointer" key={variant.id} onClick={() => handleVariantChange(index, variant.id, singleProduct.id)}>
+              <figure className={`${localVariantOption === index ? 'border-orange-700  border-4 ' : 'border-gray-500 border-2 '} rounded-full w-7 h-7 hover:cursor-pointer`} key={variant.id} onClick={() => handleVariantChange(index, variant.id, singleProduct.id)}>
                 <img src={variant.textureImage} alt="" className="object-cover object-center w-full h-full rounded-full" />
               </figure>
             );
