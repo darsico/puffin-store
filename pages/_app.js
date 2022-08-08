@@ -3,9 +3,9 @@ import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ApolloContext>
-      <Component {...pageProps} />;
-    </ApolloContext>
+      <ApolloContext>
+        <Component {...pageProps} />;
+      </ApolloContext>
   );
 }
 

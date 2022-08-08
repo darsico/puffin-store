@@ -9,13 +9,11 @@ import { useEffect, useState } from 'react';
 import CartIcon from '../MiniCart/CartIcon';
 import { GET_ALL_DEVICES } from '../../data/queryDevice';
 import { useQuery } from '@apollo/client';
+import SignInButton from '../Buttons/SignInButton';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeviceMenuOpen, setIsDeviceMenuOpen] = useState(false);
   const { data } = useQuery(GET_ALL_DEVICES);
-  // useEffect(() => {
-  //   if (data) console.log(data);
-  // }, [data]);
 
   useEffect(() => {
     isMenuOpen ? (document.body.style.overflow = 'hidden') : (document.body.style.overflow = 'auto');
@@ -72,15 +70,9 @@ const Header = () => {
                     })}
                 </ul>
               </motion.div>
-              {/* <Link href="/explore">
-                <a onClick={handleMenuClose}>Explora</a>
-              </Link>
-              <Link href="/sale">
-                <a onClick={handleMenuClose}>Sale</a>
-              </Link> */}
             </div>
           </nav>
-
+          <SignInButton />
           <div className="z-30 pr-3">{isMenuOpen ? <GrClose className="z-30 text-2xl hover:cursor-pointer" onClick={handleCancelClick} /> : <IoIosMenu className="text-3xl hover:cursor-pointer lg:hidden" onClick={() => setIsMenuOpen(true)} />}</div>
           <CartIcon />
         </div>
