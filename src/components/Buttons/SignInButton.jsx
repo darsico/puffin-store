@@ -4,13 +4,13 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../../../context/AuthContext';
 
 const SignInButton = () => {
-  const { user, isLoading } = useAuth();
+  const { user } = useAuth();
 
   const link = `${user ? '/account' : '/account/login'}`;
 
   return (
     <Link href={link}>
-      <AiOutlineUser className=" text-2xl mr-2 hover:cursor-pointer" href="" />
+      <AiOutlineUser className=" text-2xl  lg:text-3xl  hover:cursor-pointer" href="" />
     </Link>
   );
 };

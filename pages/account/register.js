@@ -11,7 +11,6 @@ import { useRouter } from 'next/router';
 
 const Register = () => {
   const { user, signUp, isLoading } = useAuth();
-
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatedPassword, setShowRepeatedPassword] = useState(false);
   const router = useRouter();

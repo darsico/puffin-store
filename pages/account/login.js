@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { logIn, user } = useAuth();
+  const { logIn, user, signInWithGoogle, isLoading } = useAuth();
   const router = useRouter();
   const {
     register,
@@ -30,11 +30,14 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleGoogleSignIn = () => {
+    signInWithGoogle();
+  };
   useLayoutEffect(() => {
     if (user) {
       router.push('/account');
     }
-  }, [user]);
+  }, [user, router]);
 
   return (
     <>
@@ -42,7 +45,7 @@ const Login = () => {
         <Layout name="Iniciar Sesión en tu cuenta">
           <section className="max-w-md mx-auto py-10">
             <h3 className="text-2xl font-semibold leading-6 text-gray-900 text-center  pb-5">Iniciar sesión en tu cuenta</h3>
-            <button type="button" className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-normal  justify-center  items-center py-2.5 text-center gap-2 flex dark:focus:ring-[#4285F4]/55 w-full">
+            <button onClick={handleGoogleSignIn} className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-normal  justify-center  items-center py-2.5 text-center gap-2 flex dark:focus:ring-[#4285F4]/55 w-full">
               <BsGoogle /> Acceder con Google
             </button>
             <p className="text-center text-gray-400 text-sm mt-5 mb-5">
