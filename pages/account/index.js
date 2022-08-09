@@ -1,5 +1,11 @@
+import Layout from '../../src/components/layout/Layout';
+
 const AccountPage = () => {
-  return <p>Account Page</p>;
+  return (
+    <Layout>
+      <p>Account Page this is a protected route</p>
+    </Layout>
+  );
   // const { user, error, isLoading } = useUser();
   // console.log(user);
   // if (isLoading) return <p>Loading...</p>;

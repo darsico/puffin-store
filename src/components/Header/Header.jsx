@@ -10,11 +10,13 @@ import CartIcon from '../MiniCart/CartIcon';
 import { GET_ALL_DEVICES } from '../../data/queryDevice';
 import { useQuery } from '@apollo/client';
 import SignInButton from '../Buttons/SignInButton';
+import { useAuth } from '../../../context/AuthContext';
+import LogOutButton from '../Buttons/LogOutButton';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeviceMenuOpen, setIsDeviceMenuOpen] = useState(false);
   const { data } = useQuery(GET_ALL_DEVICES);
-
+  const { user } = useAuth();
   useEffect(() => {
     isMenuOpen ? (document.body.style.overflow = 'hidden') : (document.body.style.overflow = 'auto');
   }, [isMenuOpen]);
@@ -72,7 +74,9 @@ const Header = () => {
               </motion.div>
             </div>
           </nav>
+          {user ? <p>{user.email}</p> : null}
           <SignInButton />
+          <LogOutButton />
           <div className="z-30 pr-3">{isMenuOpen ? <GrClose className="z-30 text-2xl hover:cursor-pointer" onClick={handleCancelClick} /> : <IoIosMenu className="text-3xl hover:cursor-pointer lg:hidden" onClick={() => setIsMenuOpen(true)} />}</div>
           <CartIcon />
         </div>
