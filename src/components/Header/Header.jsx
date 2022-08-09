@@ -19,7 +19,6 @@ import isotype from '../../../public/isotipo.svg';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeviceMenuOpen, setIsDeviceMenuOpen] = useState(false);
-  const [isDesktopDeviceMenuOpen, setIsDesktopDeviceMenuOpen] = useState(false);
   const { data } = useQuery(GET_ALL_DEVICES);
   const { user } = useAuth();
   useEffect(() => {
