@@ -11,17 +11,20 @@ import OrderSummary from '../src/components/Checkout/OrderSummary.jsx';
 import { useRouter } from 'next/router';
 const Checkout = () => {
   const { user, signUp, isLoading } = useAuth();
+
   const { cart } = useCartStore((state) => state) || [];
   const { deliveryMethod } = useCheckout((state) => state) || {};
   const cartTotal = (cart.length > 0 && cart.reduce((acc, item) => acc + item.quantity * item.price, 0)) || 0;
   const deliveryMethodExists = Object.keys(deliveryMethod).length;
   const cartTotalWithDelivery = deliveryMethodExists ? cartTotal + deliveryMethod.price : cartTotal;
   const router = useRouter();
-  useEffect(() => {
-    if (cart.length === 0) {
-      window.location.href = '/';
-    }
-  }, []);
+
+  // useEffect(() => {
+  //   if (cart.length === 0) {
+  //     router.push("/devices/")
+  //   }
+  // }, []);
+
   useEffect(() => {
     window.localStorage.removeItem('payer');
   }, [router]);

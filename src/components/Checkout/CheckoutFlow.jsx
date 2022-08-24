@@ -6,6 +6,7 @@ import { useCheckout } from '../../store';
 import CheckoutInfo from './CheckoutInfo';
 import ContactForm from './ContactForm';
 import DeliveryForm from './DeliveryForm';
+import PaymentForm from './PaymentForm';
 
 const CheckoutFlow = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -31,7 +32,7 @@ const CheckoutFlow = () => {
   };
   const styleTab = (index) => {
     return `${selectedIndex === index ? 'text-gray-900 font-semibold' : 'text-gray-500'} ${allowed.includes(index) ? 'text-gray-500' : 'text-gray-300'} py-4 flex gap-4 items-center`;
-  };
+  }; 
 
   return (
     <section className="pt-3">
@@ -56,7 +57,7 @@ const CheckoutFlow = () => {
             <DeliveryForm goToPaymentSection={goToPaymentSection} changeTab={changeTab} selectedIndex={selectedIndex} />
           </Tab.Panel>
           <Tab.Panel>
-            <CheckoutInfo selectedIndex={selectedIndex} changeTab={changeTab} />
+            <PaymentForm selectedIndex={selectedIndex} changeTab={changeTab} />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
