@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useCartStore, useStore } from '../store';
 
-const useCheckout = (order = []) => {
+const useCheckout = (order) => {
   const [isLoading, setIsLoading] = useState(false);
   const { clearCart } = useCartStore((state) => state);
   const { setIsOpenCart } = useStore((state) => state);
@@ -17,10 +17,13 @@ const useCheckout = (order = []) => {
     },
     data: order,
   };
+
   const mpCheckout = async () => {
+    console.log(order);
     setIsLoading(true);
     try {
       const response = await axios(config);
+      console.log(response);
       if (response.status === 200) {
         console.log(response.data.init_point);
         const { init_point } = response.data;

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useEffect } from 'react';
 import AddToCartButton from '../../src/components/Buttons/AddToCartButton';
 import CheckoutButton from '../../src/components/Buttons/CheckoutButton';

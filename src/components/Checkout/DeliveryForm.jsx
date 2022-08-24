@@ -1,7 +1,7 @@
 import CheckoutInfo from './CheckoutInfo';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { useEffect, useState } from 'react';
-import { useCheckout } from '../../store';
+import { useCheckoutStore } from '../../store';
 import { MdOutlineArrowBackIosNew } from 'react-icons/md';
 
 const data = [
@@ -44,7 +44,7 @@ const data = [
 const DeliveryForm = ({ goToPaymentSection, changeTab, selectedIndex }) => {
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(null);
 
-  const { setDeliveryMethod, deliveryMethod } = useCheckout((state) => state);
+  const { setDeliveryMethod, deliveryMethod } = useCheckoutStore((state) => state);
 
   const deliveryMethodExists = Object.keys(deliveryMethod).length;
 

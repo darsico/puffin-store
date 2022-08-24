@@ -1,11 +1,12 @@
-import { useCartStore, useCheckout } from '../../store';
+import { useCartStore, useCheckoutStore } from '../../store';
 
 const OrderSummary = () => {
-  const { cart } = useCartStore((state) => state) || [];
-  const { deliveryMethod } = useCheckout((state) => state);
+  const { cart, getSubtotal } = useCartStore((state) => state) || [];
+  const { deliveryMethod } = useCheckoutStore((state) => state);
+
   const deliveryMethodExists = Object.keys(deliveryMethod).length;
 
-  const cartSubtotal = (cart.length > 0 && cart.reduce((acc, item) => acc + item.quantity * item.price, 0)) || 0;
+  const cartSubtotal = getSubtotal();
   const cartTotalWithDelivery = deliveryMethodExists ? cartSubtotal + deliveryMethod.price : cartSubtotal;
   const IGVinPeru = 0.18;
   const IGV = (cartTotalWithDelivery * IGVinPeru).toFixed(2) || 0;
@@ -37,7 +38,7 @@ const OrderSummary = () => {
       <div className="py-4 border-b-2 flex flex-col gap-2">
         <div className="flex justify-between ">
           <p>Subtotal</p>
-          <p>S/.{cartSubtotal}</p>
+          <p>S/.{cartSubtotal.toFixed(2)}</p>
         </div>
         {/* <div className="flex justify-between ">
           <p>IGV</p>
@@ -45,7 +46,7 @@ const OrderSummary = () => {
         </div> */}
         <div className="flex justify-between ">
           <p>Envío</p>
-          <p>{deliveryMethodExists ? `${deliveryMethod.price === 0 ? 'GRATIS' : `S/.${deliveryMethod.price}`}` : 'Calculado en el siguiente paso'}</p>
+          <p>{deliveryMethodExists ? `${deliveryMethod.price === 0 ? 'GRATIS' : `S/.${deliveryMethod.price.toFixed(2)}`}` : 'Calculado en el siguiente paso'}</p>
         </div>
       </div>
       <div className="flex justify-between py-4 items-center">

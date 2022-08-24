@@ -54,7 +54,14 @@ export const useCartStore = create(
         }),
 
       removeCart: (id) => set((state) => ({ ...state, cart: state.cart.filter((element) => element.productId !== id) })),
+
       clearCart: () => set(() => ({ cart: [] })),
+
+      getSubtotal: () => {
+        const cart = get().cart;
+        let subTotal = cart.reduce((acc, item) => acc + item.quantity * item.price, 0) || 0;
+        return subTotal;
+      },
 
       decreaseOne: (id) =>
         set((state) => {
@@ -78,7 +85,7 @@ export const useCartStore = create(
   )
 );
 
-export const useCheckout = create((set) => ({
+export const useCheckoutStore = create((set) => ({
   deliveryMethod: {},
   setDeliveryMethod: (data) => set((state) => ({ ...state, deliveryMethod: data })),
   clearDeliveryMethod: () => set((state) => ({ ...state, deliveryMethod: {} })),
@@ -90,5 +97,5 @@ export const useCheckout = create((set) => ({
 if (process.env.NODE_ENV === 'development') {
   mountStoreDevtool('store', useStore);
   mountStoreDevtool('cart', useCartStore);
-  mountStoreDevtool('checkout', useCheckout);
+  mountStoreDevtool('checkout', useCheckoutStore);
 }

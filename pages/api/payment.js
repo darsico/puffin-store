@@ -1,7 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 export default function handler(req, res) {
+  console.log(req.body);
   const request = req.body;
+  const { order, payer, payerEmail } = request;
+
   const mercadoPago = require('mercadopago');
 
   mercadoPago.configure({
@@ -25,9 +28,26 @@ export default function handler(req, res) {
       failure: redirectURL,
       pending: redirectURL,
     },
+    statement_descriptor: 'Puffin Case',
+    // shipments: {
+    //   cost: order.deliveryPrice,
+    //   mode: 'not_specified',
+    // },
+    // payer: {
+    //   name: payer.name,
+    //   surname: payer.surname,
+    //   email: payerEmail,
+    //   phone: {
+    //     area_code: Number(payer.area_code),
+    //     number: Number(payer.number),
+    //   },
+    //   address: {
+    //     street_name: payer.address,
+    //   },
+    // },
   };
 
-  request.map(({ productId, name, price, quantity, color, device }) => {
+  order.products.map(({ productId, name, price, quantity, color, device }) => {
     preference.items.push({
       id: productId,
       title: name,

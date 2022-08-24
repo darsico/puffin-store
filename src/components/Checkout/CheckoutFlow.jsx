@@ -2,7 +2,7 @@ import { Tab } from '@headlessui/react';
 import { useEffect, useState } from 'react';
 import { BsWindowSidebar } from 'react-icons/bs';
 import { MdArrowForwardIos } from 'react-icons/md';
-import { useCheckout } from '../../store';
+import { useCheckoutStore } from '../../store';
 import CheckoutInfo from './CheckoutInfo';
 import ContactForm from './ContactForm';
 import DeliveryForm from './DeliveryForm';
@@ -11,7 +11,7 @@ import PaymentForm from './PaymentForm';
 const CheckoutFlow = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [allowed, setAllowed] = useState([]);
-  const { deliveryMethod } = useCheckout((state) => state);
+  const { deliveryMethod } = useCheckoutStore((state) => state);
 
   const deliveryMethodExists = Object.keys(deliveryMethod).length;
 
@@ -32,10 +32,10 @@ const CheckoutFlow = () => {
   };
   const styleTab = (index) => {
     return `${selectedIndex === index ? 'text-gray-900 font-semibold' : 'text-gray-500'} ${allowed.includes(index) ? 'text-gray-500' : 'text-gray-300'} py-4 flex gap-4 items-center`;
-  }; 
+  };
 
   return (
-    <section className="pt-3">
+    <section className="pt-3 md:border-r-2 md:pr-8">
       <Tab.Group manual selectedIndex={selectedIndex} onChange={setSelectedIndex}>
         <Tab.List className="grid grid-cols-3 w-fit">
           <Tab className={`${selectedIndex === 0 ? 'text-gray-900 font-semibold' : 'text-gray-500'}  py-4 flex gap-4 items-center`}>

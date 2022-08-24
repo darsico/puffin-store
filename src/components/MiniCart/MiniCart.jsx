@@ -2,9 +2,7 @@ import { useCartStore, useStore } from '../../store';
 import { GrClose } from 'react-icons/gr';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './MiniCart.module.css';
-import { useState } from 'react';
-import TinyLoader from '../Loaders/TinyLoader';
-import useCheckout from '../../hooks/useCheckout';
+import Link from 'next/link';
 
 const MiniCart = () => {
   const { isOpenCart, setIsOpenCart } = useStore((state) => state);
@@ -17,16 +15,6 @@ const MiniCart = () => {
   };
   const increaseQuantity = (id) => {
     increaseOne(id);
-  };
-
-  const { mpCheckout, isLoading } = useCheckout(cart);
-
-  const checkoutCart = async () => {
-    try {
-      await mpCheckout();
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   const removeFromCart = (id) => {
@@ -56,7 +44,7 @@ const MiniCart = () => {
                       <figure className="w-28">
                         <img src={productImage[0]} alt="" className="object-cover" />
                       </figure>
-                      <div className="flex flex-col justify-between h-fit md:h-full px-2 gap-2">
+                      <div className="flex flex-col justify-between gap-2 px-2 h-fit md:h-full">
                         <div className="flex flex-col gap-1">
                           <p className="text-lg font-semibold">
                             {name} {quantity === 1 ? '' : `x ${quantity}`}
@@ -64,7 +52,7 @@ const MiniCart = () => {
                           <p className="mb-auto text-sm font-medium text-gray-400">
                             {device} / {color}
                           </p>
-                          <p className="md:self-end md:text-xl md:font-semibold font-medium md:hidden block">S/.{(price * quantity).toFixed(2)}</p>
+                          <p className="block font-medium md:self-end md:text-xl md:font-semibold md:hidden">S/.{(price * quantity).toFixed(2)}</p>
                         </div>
                         <div className="flex items-center">
                           <button className="px-2 text-base transition-all bg-gray-100 hover:bg-gray-300" onClick={() => reduceQuantity(productId)}>
@@ -75,11 +63,11 @@ const MiniCart = () => {
                             +
                           </button>
                         </div>
-                        <p className="text-xs text-gray-400 transition-all font-base hover:cursor-pointer hover:text-gray-600 pt-2 md:pt-0" onClick={() => removeFromCart(productId)}>
+                        <p className="pt-2 text-xs text-gray-400 transition-all font-base hover:cursor-pointer hover:text-gray-600 md:pt-0" onClick={() => removeFromCart(productId)}>
                           Eliminar del carrito
                         </p>
                       </div>
-                      <p className="md:self-end md:text-xl md:font-semibold font-medium md:block hidden">S/.{(price * quantity).toFixed(2)}</p>
+                      <p className="hidden font-medium md:self-end md:text-xl md:font-semibold md:block">S/.{(price * quantity).toFixed(2)}</p>
                     </motion.li>
                   );
                 })
@@ -89,21 +77,14 @@ const MiniCart = () => {
             </ul>
           </div>
           {cart && cart.length > 0 && (
-            <div className="absolute bottom-0 left-0 w-full px-5 pt-2 pb-5 md:p-5  bg-gray-100">
+            <div className="absolute bottom-0 left-0 w-full px-5 pt-2 pb-5 bg-gray-100 md:p-5">
               <div className="flex items-center justify-between py-4">
                 <h3 className="text-xl">Subtotal</h3>
                 <p className="text-2xl font-semibold">S/.{cartSubtotal}</p>
               </div>
-              <button className="flex items-center justify-center w-full gap-8 p-5 text-2xl text-white bg-black" onClick={checkoutCart}>
-                Pagar Ahora
-                {isLoading ? (
-                  <span className="scale-150">
-                    <TinyLoader />
-                  </span>
-                ) : (
-                  ''
-                )}
-              </button>
+              <Link href="/checkout">
+                <a className="flex items-center justify-center w-full gap-8 p-5 text-2xl text-white bg-black">Pagar Ahora</a>
+              </Link>
               <p className="pt-2 leading-5 ">*Los impuestos y el envío serán calculados al momento del pago</p>
             </div>
           )}

@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useFormPersist from 'react-hook-form-persist';
 import { useAuth } from '../../../context/AuthContext';
-import { useCheckout } from '../../store';
+import { useCheckoutStore } from '../../store';
 import { AiOutlineCheck } from 'react-icons/ai';
 
 const ContactForm = ({ goToDeliverySection }) => {
-  const { setPayer } = useCheckout((state) => state);
+  const { setPayer } = useCheckoutStore((state) => state);
   const { user } = useAuth();
   const {
     register,

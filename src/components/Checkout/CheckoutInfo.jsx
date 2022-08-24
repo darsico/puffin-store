@@ -1,7 +1,7 @@
-import { useCheckout } from '../../store';
+import { useCartStore, useCheckoutStore } from '../../store';
 
 const CheckoutInfo = ({ changeTab, selectedIndex }) => {
-  const { deliveryMethod, payer } = useCheckout((state) => state);
+  const { deliveryMethod, payer } = useCheckoutStore((state) => state);
 
   return (
     <section className="flex flex-col gap-2 border rounded-md p-5">

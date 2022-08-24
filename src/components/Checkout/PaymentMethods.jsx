@@ -41,7 +41,7 @@ const PaymentMethods = () => {
         <div className="space-y-4 pt-6 pb-4">
           {methods.map((method) => (
             <RadioGroup.Option
-              key={method.name}
+              key={method.id}
               value={method}
               className={({ active, checked }) =>
                 `${active ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300' : ''}
